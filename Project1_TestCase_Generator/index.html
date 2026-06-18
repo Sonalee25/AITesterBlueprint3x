@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RICE-POT Test Plan Generator — AI-powered comprehensive test plan creation for the Restful-Booker API using the RICE-POT prompt framework.">
+    <title>TestForge — RICE-POT Test Plan Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <div class="logo" id="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#logoGrad)" stroke-width="2.5"/>
+                        <path d="M10 16L14 20L22 12" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6366f1"/>
+                                <stop offset="1" stop-color="#a78bfa"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">TestForge</span>
+                <span class="logo-badge">RICE-POT</span>
+            </div>
+            <nav class="nav" id="main-nav">
+                <a href="#ricepot" class="nav-link active" data-section="ricepot">RICE-POT</a>
+                <a href="#generator" class="nav-link" data-section="generator">Generator</a>
+                <a href="#test-plan-output" class="nav-link" data-section="test-plan-output">Test Plan</a>
+                <a href="#test-cases" class="nav-link" data-section="test-cases">Test Cases</a>
+                <a href="#metrics" class="nav-link" data-section="metrics">Metrics</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-primary btn-sm" id="export-btn" title="Export all generated content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                    Export
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    Restful-Booker API &bull; RICE-POT Framework
+                </div>
+                <h1 class="hero-title">
+                    AI Test Plan<br><span class="gradient-text">Generator</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Enterprise-grade test plan generation using the <strong>RICE-POT</strong> prompt framework.
+                    Configure Role, Instructions, Context, Example, Parameters, Output & Tone — then generate comprehensive test plans and test cases.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <span class="stat-number" id="stat-endpoints">7</span>
+                        <span class="stat-label">API Endpoints</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="stat-sections">12</span>
+                        <span class="stat-label">Plan Sections</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="stat-cases">0</span>
+                        <span class="stat-label">Test Cases</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="stat-coverage">0%</span>
+                        <span class="stat-label">Coverage</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RICE-POT Framework Section -->
+        <section class="section" id="ricepot">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    RICE-POT Framework
+                </h2>
+                <p class="section-desc">Configure each component of the RICE-POT prompt to generate a tailored test plan</p>
+            </div>
+
+            <div class="ricepot-grid">
+                <!-- R — Role -->
+                <div class="ricepot-card glass-card" data-letter="R">
+                    <div class="ricepot-letter-badge letter-r">R</div>
+                    <h3 class="ricepot-label">Role</h3>
+                    <p class="ricepot-desc">Define the expertise level and authority of the QA persona</p>
+                    <div class="form-group">
+                        <select id="rp-role" class="form-select">
+                            <option value="senior-qa">Senior QA Lead (15+ years)</option>
+                            <option value="qa-architect">QA Architect</option>
+                            <option value="sdet">SDET Lead</option>
+                            <option value="test-manager">Test Manager</option>
+                        </select>
+                    </div>
+                    <div class="ricepot-preview" id="preview-role">
+                        Senior QA Lead with 15+ years of experience in API testing, test planning, and software quality assurance.
+                    </div>
+                </div>
+
+                <!-- I — Instructions -->
+                <div class="ricepot-card glass-card" data-letter="I">
+                    <div class="ricepot-letter-badge letter-i">I</div>
+                    <h3 class="ricepot-label">Instructions</h3>
+                    <p class="ricepot-desc">12 mandatory sections + Do NOT rules</p>
+                    <div class="instruction-checklist">
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Objective</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Scope (20+ types)</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Inclusions (19+ areas)</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Test Environments</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Defect Reporting</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Test Strategy (3 steps)</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Test Schedule</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Test Deliverables</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Entry & Exit Criteria</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Tools</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Risks & Mitigations</span></label>
+                        <label class="checkbox-item"><input type="checkbox" checked disabled><span class="checkbox-custom"></span><span>Approvals</span></label>
+                    </div>
+                </div>
+
+                <!-- C — Context -->
+                <div class="ricepot-card glass-card ricepot-card-wide" data-letter="C">
+                    <div class="ricepot-letter-badge letter-c">C</div>
+                    <h3 class="ricepot-label">Context</h3>
+                    <p class="ricepot-desc">System under test, environments, team, and platform details</p>
+                    <div class="context-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="ctx-system">System Name</label>
+                            <input type="text" id="ctx-system" class="form-input" value="Restful-Booker API" placeholder="API or Application Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ctx-url">API Documentation URL</label>
+                            <input type="text" id="ctx-url" class="form-input" value="https://restful-booker.herokuapp.com/apidoc/index.html" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ctx-frontend">Frontend POC</label>
+                            <input type="text" id="ctx-frontend" class="form-input" value="Devesh" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ctx-backend">Backend POC</label>
+                            <input type="text" id="ctx-backend" class="form-input" value="Sonal" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ctx-devops">DevOps POC</label>
+                            <input type="text" id="ctx-devops" class="form-input" value="Prajeeth" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ctx-sprints">Sprint Duration</label>
+                            <select id="ctx-sprints" class="form-select">
+                                <option value="2">2 Sprints</option>
+                                <option value="3">3 Sprints</option>
+                                <option value="4">4 Sprints</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E — Example -->
+                <div class="ricepot-card glass-card" data-letter="E">
+                    <div class="ricepot-letter-badge letter-e">E</div>
+                    <h3 class="ricepot-label">Example</h3>
+                    <p class="ricepot-desc">Anchored sample formats for output consistency</p>
+                    <div class="example-preview">
+                        <div class="example-block">
+                            <span class="example-tag">Objective Format</span>
+                            <p>"The objective of this test plan is to verify the <em>Restful-Booker</em> API, covering booking creation, update, deletion, and authentication..."</p>
+                        </div>
+                        <div class="example-block">
+                            <span class="example-tag">Scope Format</span>
+                            <p>"1. Functional Testing:<br>&nbsp;&nbsp;- Verify correctness of all API endpoints..."</p>
+                        </div>
+                        <div class="example-block">
+                            <span class="example-tag">Tables</span>
+                            <p>Environment table, Defect POC table, Schedule table</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P — Parameters -->
+                <div class="ricepot-card glass-card" data-letter="P">
+                    <div class="ricepot-letter-badge letter-p">P</div>
+                    <h3 class="ricepot-label">Parameters</h3>
+                    <p class="ricepot-desc">Quality constraints and guardrails</p>
+                    <div class="params-list">
+                        <div class="param-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Deterministic output</span>
+                        </div>
+                        <div class="param-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>No hallucination</span>
+                        </div>
+                        <div class="param-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>20+ Scope types minimum</span>
+                        </div>
+                        <div class="param-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>19+ Inclusion areas</span>
+                        </div>
+                        <div class="param-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Production-quality output</span>
+                        </div>
+                        <div class="param-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>No abbreviations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- O — Output -->
+                <div class="ricepot-card glass-card" data-letter="O">
+                    <div class="ricepot-letter-badge letter-o">O</div>
+                    <h3 class="ricepot-label">Output</h3>
+                    <p class="ricepot-desc">Format, structure, and heading conventions</p>
+                    <div class="form-group">
+                        <label class="form-label">Output Format</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="output-format" value="markdown" checked><span class="radio-custom"></span><span>Markdown (.md)</span></label>
+                            <label class="radio-item"><input type="radio" name="output-format" value="html"><span class="radio-custom"></span><span>HTML Report</span></label>
+                            <label class="radio-item"><input type="radio" name="output-format" value="pdf"><span class="radio-custom"></span><span>PDF Document</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- T — Tone -->
+                <div class="ricepot-card glass-card" data-letter="T">
+                    <div class="ricepot-letter-badge letter-t">T</div>
+                    <h3 class="ricepot-label">Tone</h3>
+                    <p class="ricepot-desc">Documentation style and voice</p>
+                    <div class="form-group">
+                        <select id="rp-tone" class="form-select">
+                            <option value="formal">Formal Enterprise (Client-Ready)</option>
+                            <option value="technical">Technical Documentation</option>
+                            <option value="concise">Concise & Actionable</option>
+                        </select>
+                    </div>
+                    <div class="tone-rules">
+                        <span class="tone-rule rule-do">✓ Declarative statements</span>
+                        <span class="tone-rule rule-do">✓ Professional language</span>
+                        <span class="tone-rule rule-dont">✗ No casual language</span>
+                        <span class="tone-rule rule-dont">✗ No first-person ("I")</span>
+                        <span class="tone-rule rule-dont">✗ No hedging phrases</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generator Section -->
+        <section class="section" id="generator">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                    Test Case Generator
+                </h2>
+                <p class="section-desc">Configure endpoints, test types, and generate comprehensive test cases</p>
+            </div>
+
+            <div class="generator-grid">
+                <!-- Configuration Panel -->
+                <div class="config-panel glass-card">
+                    <h3 class="card-title">Configuration</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="endpoint-select">API Endpoint</label>
+                        <div class="select-wrapper">
+                            <select id="endpoint-select" class="form-select">
+                                <option value="all">All Endpoints</option>
+                                <option value="auth">POST /auth — CreateToken</option>
+                                <option value="getBookingIds">GET /booking — GetBookingIds</option>
+                                <option value="getBooking">GET /booking/:id — GetBooking</option>
+                                <option value="createBooking">POST /booking — CreateBooking</option>
+                                <option value="updateBooking">PUT /booking/:id — UpdateBooking</option>
+                                <option value="partialUpdate">PATCH /booking/:id — PartialUpdateBooking</option>
+                                <option value="deleteBooking">DELETE /booking/:id — DeleteBooking</option>
+                                <option value="healthCheck">GET /ping — HealthCheck</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Test Types</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item" for="type-functional"><input type="checkbox" id="type-functional" checked><span class="checkbox-custom"></span><span>Functional</span></label>
+                            <label class="checkbox-item" for="type-negative"><input type="checkbox" id="type-negative" checked><span class="checkbox-custom"></span><span>Negative</span></label>
+                            <label class="checkbox-item" for="type-boundary"><input type="checkbox" id="type-boundary" checked><span class="checkbox-custom"></span><span>Boundary</span></label>
+                            <label class="checkbox-item" for="type-security"><input type="checkbox" id="type-security"><span class="checkbox-custom"></span><span>Security</span></label>
+                            <label class="checkbox-item" for="type-performance"><input type="checkbox" id="type-performance"><span class="checkbox-custom"></span><span>Performance</span></label>
+                            <label class="checkbox-item" for="type-integration"><input type="checkbox" id="type-integration"><span class="checkbox-custom"></span><span>Integration</span></label>
+                            <label class="checkbox-item" for="type-edge"><input type="checkbox" id="type-edge"><span class="checkbox-custom"></span><span>Edge Case</span></label>
+                            <label class="checkbox-item" for="type-data"><input type="checkbox" id="type-data"><span class="checkbox-custom"></span><span>Data Validation</span></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="priority-select">Priority Level</label>
+                        <div class="select-wrapper">
+                            <select id="priority-select" class="form-select">
+                                <option value="all">All Priorities</option>
+                                <option value="critical">Critical</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="env-select">Test Environment</label>
+                        <div class="select-wrapper">
+                            <select id="env-select" class="form-select">
+                                <option value="qa">QA — restful-booker.herokuapp.com</option>
+                                <option value="preprod">Pre-Production</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-full" id="generate-plan-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                            </svg>
+                            Generate Test Plan
+                        </button>
+                        <button class="btn btn-secondary btn-full" id="generate-cases-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                            </svg>
+                            Generate Test Cases
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Endpoint Info Panel -->
+                <div class="endpoint-panel glass-card">
+                    <h3 class="card-title">Endpoint Details</h3>
+                    <div id="endpoint-info" class="endpoint-info">
+                        <div class="endpoint-header-info">
+                            <span class="method-badge method-all">ALL</span>
+                            <span class="endpoint-path">All Endpoints</span>
+                        </div>
+                        <p class="endpoint-desc">Select an endpoint to view its details, or generate test cases for all endpoints at once.</p>
+                        
+                        <div class="endpoint-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Base URL</span>
+                                <code class="meta-value">https://restful-booker.herokuapp.com</code>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Auth</span>
+                                <code class="meta-value">Token / Basic Auth</code>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Formats</span>
+                                <code class="meta-value">JSON, XML, URL-encoded</code>
+                            </div>
+                        </div>
+
+                        <div class="endpoint-schema" id="endpoint-schema"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generated Test Plan Output Section -->
+        <section class="section" id="test-plan-output">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                    Generated Test Plan
+                </h2>
+                <p class="section-desc">RICE-POT generated test plan following all 12 mandatory sections</p>
+            </div>
+
+            <div id="test-plan-container" class="test-plan-container">
+                <div class="empty-state" id="plan-empty-state">
+                    <div class="empty-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="12" y1="18" x2="12" y2="12"/>
+                            <line x1="9" y1="15" x2="15" y2="15"/>
+                        </svg>
+                    </div>
+                    <h3>No Test Plan Generated Yet</h3>
+                    <p>Configure the RICE-POT parameters above and click <strong>"Generate Test Plan"</strong> to create a comprehensive enterprise-grade test plan.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Test Cases Section -->
+        <section class="section" id="test-cases">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        </svg>
+                        Generated Test Cases
+                    </h2>
+                    <p class="section-desc">Comprehensive test scenarios following RICE-POT framework</p>
+                </div>
+                <div class="section-actions">
+                    <div class="search-box" id="search-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input type="text" id="search-input" placeholder="Search test cases..." class="search-input">
+                    </div>
+                    <div class="filter-pills" id="filter-pills">
+                        <button class="pill active" data-filter="all">All</button>
+                        <button class="pill" data-filter="functional">Functional</button>
+                        <button class="pill" data-filter="negative">Negative</button>
+                        <button class="pill" data-filter="boundary">Boundary</button>
+                        <button class="pill" data-filter="security">Security</button>
+                        <button class="pill" data-filter="edge">Edge Case</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="test-cases-container" class="test-cases-container">
+                <div class="empty-state" id="cases-empty-state">
+                    <div class="empty-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        </svg>
+                    </div>
+                    <h3>No Test Cases Yet</h3>
+                    <p>Configure your options and click <strong>"Generate Test Cases"</strong> to create comprehensive test scenarios for the Restful-Booker API.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics Section -->
+        <section class="section" id="metrics">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                    Coverage Metrics
+                </h2>
+                <p class="section-desc">Test coverage analysis across all API endpoints and RICE-POT sections</p>
+            </div>
+
+            <div class="metrics-grid" id="metrics-grid">
+                <!-- Metrics will be rendered by JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <svg class="toast-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        <span id="toast-text">Test cases generated successfully!</span>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay" style="display:none;">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p id="loading-text">Generating test plan using RICE-POT framework...</p>
+            <div class="loading-progress">
+                <div class="loading-progress-bar" id="loading-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
